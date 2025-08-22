@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Textos</title>
+    <!-- Enlace al archivo CSS externo -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'analisis/styles.css' %}">
+</head>
+<body>
+    <h1>Lista de Textos</h1>
+    <ul>
+        {% for texto in textos %}
+            <li>{{ texto.titulo }}</li>
+        {% empty %}
+            <li>No hay textos disponibles.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Histograma de Palabras</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Histograma para el texto: {{ titulo_texto }}</h1>
+    <a href="{% url 'lista_textos' %}">Volver a la lista de textos</a>
+    
+    {% if histograma %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Palabra</th>
+                    <th>Frecuencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for palabra, frecuencia in histograma %}
+                    <tr>
+                        <td>{{ palabra }}</td>
+                        <td>{{ frecuencia }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No se pudo generar el histograma para este texto.</p>
+    {% endif %}
+</body>
+</html>
+

@@ -1,0 +1,16 @@
+mi programa debera tener entrada de informacion(archivos selecciono el usuario), siendo un analizador lexico graficos.
+
+- debera generar un output  (creacion de archivos txt).
+
+Debera formar TOKEN revisar la fotografia sobre los toke que deberan ser creados.
+
+Lexema sera el valor particular que se les asignara acada uno de esos TOKEN.Revisar fotografias
+
+Investigar un token visual y como desarrollarlo.
+
+Para poder reconocer cadenas alfanumericos  se utlizaran expreciones regulares para  la traduccion de diferentes lessemas y lexicos.
+
+Notas importaantes :  buscar  el proyecto  de analisador lexico echo en sexto semestre con yaroz.
+
+Investigar el toque variables
+
