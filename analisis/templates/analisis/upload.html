@@ -1,124 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analizador de Texto</title>
-    <style>
-        /* Estilos CSS para mejorar la apariencia */
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        form {
-            margin-bottom: 20px;
-        }
-        input[type="file"] {
-            border: 1px solid #ddd;
-            padding: 8px;
-            border-radius: 5px;
-        }
-        button[type="submit"] {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .histogram-container {
-            margin-top: 30px;
-        }
-        h2 {
-            color: #555;
-            margin-bottom: 15px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #f9f9f9;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #007bff;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .file-info {
-            font-style: italic;
-            color: #777;
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'analisis/styles.css' %}">
 </head>
 <body>
     <div class="container">
         <h1>Analizador de Archivos de Texto</h1>
-        
-        <p>Sube un archivo de texto para generar un histograma de las palabras.</p>
 
         {% if error_message %}
             <p style="color: red;">{{ error_message }}</p>
         {% endif %}
 
+        <!-- Subir archivo -->
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Generar Histograma</button>
+            <button type="submit" name="action" value="upload">Subir archivo</button>
         </form>
 
         {% if file_name %}
             <div class="file-info">
-                Histograma para el archivo: <strong>{{ file_name }}</strong>
+                Archivo cargado: <strong>{{ file_name }}</strong>
             </div>
+
+            <form method="post" class="actions">
+                {% csrf_token %}
+                <input type="hidden" name="file_id" value="{{ file_id }}">
+                <button type="submit" name="action" value="histogram">Generar histograma</button>
+                <div class="dropdown">
+                    <button type="button" class="dropbtn">Más acciones</button>
+                    <div class="dropdown-content">
+                        <button type="submit" name="action" value="process">Procesar texto (limpieza)</button>
+                        <button type="submit" name="action" value="uppercase">Convertir a MAYÚSCULAS</button>
+                        <button type="submit" name="action" value="lowercase">Convertir a minúsculas</button>
+                    </div>
+                </div>
+            </form>
         {% endif %}
 
         {% if histogram %}
-            <div class="histogram-container">
-                <h2>Histograma de Palabras</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Palabra</th>
-                            <th>Frecuencia</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for word, count in histogram %}
-                        <tr>
-                            <td>{{ word }}</td>
-                            <td>{{ count }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+            <h2 class="section-title">Histograma de Palabras</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Palabra</th>
+                        <th>Frecuencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for word, count in histogram %}
+                    <tr>
+                        <td>{{ word }}</td>
+                        <td>{{ count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        {% if transformed_text %}
+            <h2 class="section-title">Resultado</h2>
+            <div class="text-box">{{ transformed_text }}</div>
         {% endif %}
     </div>
 </body>
 </html>
-

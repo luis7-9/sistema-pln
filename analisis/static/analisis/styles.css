@@ -1,11 +1,156 @@
+/* Tipografía y layout general */
 body {
-    font-family: sans-serif;
-    margin: 20px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    padding: 20px;
 }
+
+/* Contenedor principal */
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+}
+
+/* Títulos y formularios */
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+/* Botones */
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Información de archivo */
+.file-info {
+    font-style: italic;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+/* Acciones */
+.actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+/* Dropdown menú */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 220px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.dropdown-content button {
+    width: 100%;
+    background: white;
+    color: #333;
+    padding: 10px 16px;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.dropdown-content button:hover {
+    background-color: #f5f5f5;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Caja de texto resultante */
+.text-box {
+    text-align: left;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.section-title {
+    color: #555;
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+/* Tabla del histograma */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Reglas previas conservadas para listas */
 ul {
     list-style: none;
     padding: 0;
 }
+
 li {
     background-color: #f4f4f4;
     padding: 10px;
