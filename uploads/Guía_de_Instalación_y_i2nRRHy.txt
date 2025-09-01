@@ -1,0 +1,69 @@
+Guía de Instalación y Ejecución del Proyecto sistema-pln
+
+Este documento contiene las instrucciones detalladas y necesarias para la correcta configuración y ejecución del proyecto sistema-pln en un entorno de desarrollo con Ubuntu o Windows. Siga los pasos al pie de la letra para evitar errores.
+Requisitos Previos
+
+Asegúrese de tener instalados los siguientes programas en su sistema:
+
+    Git: Para clonar el repositorio.
+
+    Python 3.12: Lenguaje de programación del proyecto.
+
+    Pipenv: Gestor de entornos y dependencias de Python.
+
+Paso 1: Clonar el Repositorio
+
+Abra su terminal o git bash y ejecute el siguiente comando para descargar el proyecto.
+
+git clone https://github.com/luis7-9/sistema-pln.git
+
+Paso 2: Navegar al Directorio del Proyecto
+
+Una vez finalizada la descarga, ingrese al directorio del proyecto.
+
+cd sistema-pln
+
+Paso 3: Instalar y Activar el Entorno Virtual con Pipenv
+
+Este comando leerá el Pipfile del proyecto, instalará todas las dependencias y activará el entorno virtual.
+
+pipenv shell
+
+    Verificación: La línea de comandos mostrará (sistema_pln) al inicio, indicando que el entorno está activo.
+
+Paso 4: Ejecutar Migraciones de Django
+
+Este paso es crucial para configurar la base de datos local del proyecto.
+
+python manage.py makemigrations
+python manage.py migrate
+
+    Verificación: No debe mostrar errores. Confirmará que las migraciones de admin, auth, contenttypes, sessions y analisis se han aplicado.
+
+Paso 5: Crear un Usuario Administrador
+
+Para acceder a la interfaz de administración de Django, cree un superusuario.
+
+python manage.py createsuperuser
+
+    Verificación: Siga las indicaciones para crear un usuario, correo y contraseña.
+
+Paso 6: Iniciar el Servidor de Desarrollo
+
+Finalmente, inicie el servidor de Django para poder acceder al proyecto.
+
+python manage.py runserver
+
+    Verificación:
+
+        Verá mensajes en la terminal indicando que el servidor se está ejecutando en http://127.0.0.1:8000/.
+
+        Abra su navegador y navegue a http://127.0.0.1:8000/ y http://127.0.0.1:8000/admin/ para verificar que el sistema funciona correctamente.
+
+Solución de Problemas Comunes
+
+    TemplateDoesNotExist: Asegúrese de que la estructura de carpetas de la aplicación analisis sea la siguiente: analisis/templates/analisis/upload.html.
+
+    Permission denied (publickey): Este error de Git se soluciona configurando un Token de Acceso Personal de GitHub (PAT) o una llave SSH. Refiérase a la documentación oficial de GitHub para más detalles.
+
+Nota Importante: La ejecución exitosa de todos los pasos garantiza que el sistema funcionará. Cualquier error que surja durante este proceso indica un problema en el entorno local del usuari

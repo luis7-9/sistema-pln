@@ -4,7 +4,7 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analizador de Texto</title>
+    <title>Analizador de Archivos de Texto</title>
     <link rel="stylesheet" href="{% static 'analisis/styles.css' %}">
 </head>
 <body>
@@ -15,7 +15,6 @@
             <p style="color: red;">{{ error_message }}</p>
         {% endif %}
 
-        <!-- Subir archivo -->
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
@@ -40,6 +39,14 @@
                     </div>
                 </div>
             </form>
+
+            <form method="post" class="actions" style="margin-top: 15px;">
+                {% csrf_token %}
+                <input type="hidden" name="file_id" value="{{ file_id }}">
+                <label for="n_value">Tamaño de N-grama:</label>
+                <input type="number" id="n_value" name="n_value" min="1" value="2" style="width: 50px; text-align: center;">
+                <button type="submit" name="action" value="ngramas">Generar N-gramas</button>
+            </form>
         {% endif %}
 
         {% if histogram %}
@@ -55,6 +62,26 @@
                     {% for word, count in histogram %}
                     <tr>
                         <td>{{ word }}</td>
+                        <td>{{ count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        {% if ngrams_data %}
+            <h2 class="section-title">N-gramas (N={{ n_value }})</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>N-grama</th>
+                        <th>Frecuencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ngram, count in ngrams_data %}
+                    <tr>
+                        <td>{{ ngram }}</td>
                         <td>{{ count }}</td>
                     </tr>
                     {% endfor %}
